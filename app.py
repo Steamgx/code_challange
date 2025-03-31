@@ -1,7 +1,7 @@
 from flask import Flask
-from database import db  # Import the db instance from database.py
+from database import db  # Import db instance from database.py
 from flask_migrate import Migrate
-from models import HeroPower  # Ensure this is correctly imported
+from models import HeroPower  # Ensure models are correctly imported
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -11,8 +11,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///superheroes.db'  # Using SQLi
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize database
-# db = SQLAlchemy(app)  # Remove the old db initialization
-migrate = Migrate(app, db)  # Initialize migrate with app and db
+db.init_app(app)  # Correct initialization
+migrate = Migrate(app, db)  # Initialize Migrate after db is set up
 
 # Import routes (to avoid circular import issues)
 from routes import *
