@@ -1,4 +1,5 @@
 from database import db
+from sqlalchemy.orm import validates
 
 # Hero Model
 class Hero(db.Model):
@@ -20,6 +21,11 @@ class Power(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
+    @validates('description')
+    def validate_description(self, key, description):
+        if len(description) < 20:
+            raise ValueError("Description must be at least 20 characters long.")
+        return description
 
     hero_powers = db.relationship('HeroPower', back_populates='power', cascade='all, delete-orphan')
 
@@ -32,6 +38,9 @@ class HeroPower(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     strength = db.Column(db.String, nullable=False)
+    __table_args__ = (
+        db.CheckConstraint("strength IN ('Strong', 'Weak', 'Average')", name="check_strength"),
+    )
 
     hero_id = db.Column(db.Integer, db.ForeignKey('heroes.id'), nullable=False)
     power_id = db.Column(db.Integer, db.ForeignKey('powers.id'), nullable=False)

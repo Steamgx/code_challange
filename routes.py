@@ -13,11 +13,12 @@ def get_heroes():
 def get_hero(id):
     hero = Hero.query.get(id)
     if hero:
+        powers = [{"id": hp.power.id, "name": hp.power.name, "description": hp.power.description} for hp in hero.hero_powers]
         return jsonify({
             "id": hero.id,
             "name": hero.name,
             "super_name": hero.super_name,
-            "powers": [{"id": power.id, "name": power.name, "description": power.description} for power in hero.powers]
+            "powers": powers
         }), 200
     return jsonify({"error": "Hero not found"}), 404
 
@@ -80,6 +81,9 @@ def assign_power():
     
     if not hero or not power:
         return jsonify({"error": "Invalid hero or power ID"}), 400
+
+    if "strength" not in data or data["strength"] not in ['Strong', 'Weak', 'Average']:
+        return jsonify({"errors": ["strength must be 'Strong', 'Weak', or 'Average'"]}), 400
 
     new_hero_power = HeroPower(
         strength=data.get("strength", "Average"),
