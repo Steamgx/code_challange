@@ -6,7 +6,7 @@ This project is a Flask-based API for managing superheroes and their powers. It 
 ## Installation Instructions
 1. Clone the repository:
    ```bash
-   git clone # Superheroes API
+   git clone 
 
 ## Description
 This project is a Flask-based API for managing superheroes and their powers. It allows users to create, read, update, and delete superhero records, as well as manage their associated powers.
@@ -14,7 +14,7 @@ This project is a Flask-based API for managing superheroes and their powers. It 
 ## Installation Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/superheroes-api.git
+   git clone https://github.com/Steamgx/code_challange.git
    cd superheroes-api
    ```
 
@@ -35,7 +35,7 @@ This project is a Flask-based API for managing superheroes and their powers. It 
    python app.py
    ```
 
-2. The API will be running on `http://127.0.0.1:5555`.
+2. The API will be running on `http://127.0.0.1:5555`or `http://127.0.0.1:5000` when using flask run
 
 ## API Endpoints
 - **GET /heroes**: Retrieve a list of all heroes.
@@ -54,7 +54,7 @@ Contributions are welcome! Please submit a pull request or open an issue for any
 This project is licensed under the MIT License.
 
 ## API Documentation
-API documentation is available at `http://127.0.0.1:5555/docs`.
+API documentation is available at `http://127.0.0.1:5555/docs`
 
 ## Testing
 To run the tests, use the following command:
